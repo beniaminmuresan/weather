@@ -10,13 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_190540) do
+ActiveRecord::Schema.define(version: 2022_02_08_193435) do
 
-  create_table "weather_configurations", force: :cascade do |t|
+  create_table "weather_preferences", force: :cascade do |t|
     t.string "short_name"
     t.decimal "value", precision: 4, scale: 2
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
