@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2022_02_08_193435) do
 
   create_table "weather_preferences", force: :cascade do |t|
     t.string "short_name"
-    t.decimal "value", precision: 4, scale: 2
+    t.decimal "value", precision: 2, scale: 2
   end
 
 end
