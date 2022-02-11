@@ -34,6 +34,8 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
+# HTTP clients
+gem 'faraday'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -41,11 +43,15 @@ group :development, :test do
 
   # Rspec + useful dependecies
   gem 'database_cleaner'
+  gem 'factory_bot_rails'
   gem 'rspec-collection_matchers'
   gem 'rspec-its'
+  gem 'rspec-json_expectations'
+  gem 'rspec_junit_formatter'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

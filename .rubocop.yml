@@ -49,9 +49,13 @@ Metrics/PerceivedComplexity:
 
 Metrics/BlockLength:
   Enabled: true
+  CountComments: false
+  Max: 50
+  Exclude:
+    - 'spec/**/*.rb'
 
 Lint/RaiseException:
-  Enabled: true
+  Exclude: 
 
 Lint/StructNewOverride:
   Enabled: true
