@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :weather_preferences, only: %i[index update]
+  resources :weather_informations, only: %i[] do
+    get :search, on: :collection
+  end
 end

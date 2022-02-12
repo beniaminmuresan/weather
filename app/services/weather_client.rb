@@ -5,7 +5,7 @@ require 'faraday'
 class WeatherClient
   attr_reader :zipcode, :api_key
 
-  def initialize(zipcode, api_key = '55b7fdf17805493199a143223212409')
+  def initialize(zipcode, api_key = ENV['WEATHER_API_KEY'])
     @api_key = api_key
     @zipcode = zipcode
   end
@@ -15,23 +15,22 @@ class WeatherClient
   end
 
   def call
-    return parse_successful if parse_successful.present?
+    return { error_message: 'Zipcode must be provided.' } unless zipcode.present?
+    return { error_message: 'Zipcode not valid in UK.' } if country.present? && country != 'UK'
+    return { error_message: error_message } if error_message.present?
 
-    parse_error
+    forecastday = parsed_response_body.dig(:forecast, :forecastday)&.first
+    { temperature_c: forecastday&.dig(:day, :maxtemp_c) }
   end
 
   private
 
-    def parse_successful
-      country = parsed_response_body.dig(:location, :country)
-      return { error_message: 'No matching location found.' } unless country == 'UK'
-
-      forecastday = parsed_response_body.dig(:forecast, :forecastday)&.first
-      { temperature_c: forecastday&.dig(:day, :maxtemp_c) }
+    def country
+      parsed_response_body.dig(:location, :country)
     end
 
-    def parse_error
-      { error_message: parsed_response_body.dig(:error, :message) }
+    def error_message
+      parsed_response_body.dig(:error, :message)
     end
 
     def parsed_response_body
