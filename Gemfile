@@ -52,6 +52,9 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'vcr'
   gem 'webmock'
+
+  # Environment vars
+  gem 'dotenv-rails'
 end
 
 group :development do
