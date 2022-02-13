@@ -1,0 +1,66 @@
+---
+openapi: 3.0.1
+info:
+  title: Weather API V1
+  version: v1
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  "/v1/weather_informations/search":
+    get:
+      summary: search weather_information
+      tags:
+      - Weather Information
+      parameters:
+      - name: zipcode
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '422':
+          description: weather information unprocessable
+  "/v1/weather_preferences":
+    get:
+      summary: list weather_preferences
+      tags:
+      - Weather Preference
+      responses:
+        '200':
+          description: successful
+  "/v1/weather_preferences/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    patch:
+      summary: update weather_preference
+      tags:
+      - Weather Preference
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: weather preference not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                weather_preference:
+                  type: object
+                  properties:
+                    value:
+                      type: number
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

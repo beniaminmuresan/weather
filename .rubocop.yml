@@ -32,7 +32,8 @@ Naming/MethodName:
   EnforcedStyle: snake_case
 
 Naming/FileName:
-  Enabled: true
+  Exclude:
+    - 'config/initializers/rswag-ui.rb'
 
 Metrics/ClassLength:
   Exclude:
@@ -113,3 +114,4 @@ Naming/InclusiveLanguage:
 
 Metrics/AbcSize:
   Max: 20
+

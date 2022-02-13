@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe WeatherPreferencesController, type: :controller do
+RSpec.describe V1::WeatherPreferencesController, type: :controller do
   describe 'GET #index' do
     subject { get :index, params: {}, as: :json }
 
@@ -26,13 +26,19 @@ RSpec.describe WeatherPreferencesController, type: :controller do
   end
 
   describe 'GET #update' do
-    subject { patch :update, params: { value: new_value, id: weather_preference.id }, as: :json }
+    subject { patch :update, params: { id: weather_preference.id }.merge(params), as: :json }
 
     let!(:weather_preference) { FactoryBot.create(:weather_preference, value: 12) }
-    let(:new_value) { '15.4' }
+    let(:params) do
+      {
+        weather_preference: {
+          value: '15.4'
+        }
+      }
+    end
 
     let(:expected_response_body) do
-      { 'id' => weather_preference.id, 'short_name' => weather_preference.short_name, 'value' => new_value }
+      { 'id' => weather_preference.id, 'short_name' => weather_preference.short_name, 'value' => '15.4' }
     end
 
     it 'renders the updated weather preferences' do

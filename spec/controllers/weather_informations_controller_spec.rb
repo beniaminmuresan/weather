@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe WeatherInformationsController, type: :controller do
+RSpec.describe V1::WeatherInformationsController, type: :controller do
   describe 'GET #search' do
     let(:zipcode) { '' }
     let(:params) { { zipcode: zipcode } }
