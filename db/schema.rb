@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_193435) do
+ActiveRecord::Schema.define(version: 2022_02_14_054816) do
 
   create_table "weather_preferences", force: :cascade do |t|
     t.string "short_name"
-    t.decimal "value", precision: 2, scale: 2
+    t.decimal "value", precision: 4, scale: 2
   end
 
 end
