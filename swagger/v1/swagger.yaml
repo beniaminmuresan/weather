@@ -3,10 +3,6 @@ openapi: 3.0.1
 info:
   title: Weather API V1
   version: v1
-consumes:
-- application/json
-produces:
-- application/json
 paths:
   "/v1/weather_informations/search":
     get:
@@ -60,7 +56,11 @@ paths:
                     value:
                       type: number
 servers:
-- url: http://{defaultHost}
+- url: https://{staging}
   variables:
-    defaultHost:
+    staging:
+      default: warm-reef-97976.herokuapp.com/
+- url: http://{localhost}
+  variables:
+    localhost:
       default: localhost:3000
