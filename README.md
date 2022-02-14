@@ -18,3 +18,11 @@ and finally, run the server
 ```
 rails s
 ```
+
+* In order to run the specs you can execute:
+```
+bundle exec rspec
+```
+
+The API is hosted on Heroku, check it out 
+[here](https://warm-reef-97976.herokuapp.com/api-docs/index.html).
