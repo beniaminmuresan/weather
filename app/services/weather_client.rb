@@ -19,11 +19,22 @@ class WeatherClient
     return { error_message: 'Zipcode not valid in UK.' } if country.present? && country != 'UK'
     return { error_message: error_message } if error_message.present?
 
-    forecastday = parsed_response_body.dig(:forecast, :forecastday)&.first
-    { temperature_c: forecastday&.dig(:day, :maxtemp_c) }
+    { temperature_c: temperature_c, description: temperature_description }
   end
 
   private
+
+    def temperature_description
+      return :hot if temperature_c >= WeatherPreference.find_by_short_name(:hot).value
+      return :warm if temperature_c >= WeatherPreference.find_by_short_name(:warm).value
+
+      :cold
+    end
+
+    def temperature_c
+      forecastday = parsed_response_body.dig(:forecast, :forecastday)&.first
+      forecastday&.dig(:day, :maxtemp_c)
+    end
 
     def country
       parsed_response_body.dig(:location, :country)

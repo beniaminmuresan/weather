@@ -6,6 +6,9 @@ RSpec.describe V1::WeatherInformationsController, type: :controller do
   describe 'GET #search' do
     let(:zipcode) { '' }
     let(:params) { { zipcode: zipcode } }
+    let!(:cold) { FactoryBot.create(:weather_preference, short_name: :cold, value: 10) }
+    let!(:warm) { FactoryBot.create(:weather_preference, short_name: :warm, value: 20) }
+    let!(:hot) { FactoryBot.create(:weather_preference, short_name: :hot, value: 30) }
 
     subject { get :search, params: params, as: :json }
 
@@ -39,7 +42,7 @@ RSpec.describe V1::WeatherInformationsController, type: :controller do
           VCR.use_cassette('zipcode_exists_in_uk') do
             subject
 
-            expect(JSON.parse(response.body)).to eq({ 'temperature_c' => 7.3 })
+            expect(JSON.parse(response.body)).to eq({ 'temperature_c' => 7.3, 'description' => 'cold' })
           end
         end
       end

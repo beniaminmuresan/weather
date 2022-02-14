@@ -8,6 +8,9 @@ RSpec.describe 'v1/weather_informations', type: :request do
       tags 'Weather Information'
       parameter name: :zipcode, in: :query, type: :string
       response(200, 'successful') do
+        let!(:cold) { FactoryBot.create(:weather_preference, short_name: :cold, value: 10) }
+        let!(:warm) { FactoryBot.create(:weather_preference, short_name: :warm, value: 20) }
+        let!(:hot) { FactoryBot.create(:weather_preference, short_name: :hot, value: 30) }
         let(:zipcode) { 'ip130sr' }
 
         it 'returns a valid 201 response' do |example|

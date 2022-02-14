@@ -35,12 +35,15 @@ RSpec.describe WeatherClient do
     end
 
     context 'zipcode exists in UK' do
+      let!(:cold) { FactoryBot.create(:weather_preference, short_name: :cold, value: 10) }
+      let!(:warm) { FactoryBot.create(:weather_preference, short_name: :warm, value: 20) }
+      let!(:hot) { FactoryBot.create(:weather_preference, short_name: :hot, value: 30) }
       let(:zipcode) { 'ip130sr' }
 
       it 'returns the temperature matching the zipcode\'s location' do
         VCR.use_cassette('zipcode_exists_in_uk') do
           result = subject.call
-          expect(result).to eq({ temperature_c: 7.3 })
+          expect(result).to eq({ temperature_c: 7.3, description: :cold })
         end
       end
     end
